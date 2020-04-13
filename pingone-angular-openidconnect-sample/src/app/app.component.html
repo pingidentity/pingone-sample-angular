@@ -1,0 +1,27 @@
+
+<div class="content" role="main">
+
+  <h1>PingOne for Customers OIDC Sample</h1>
+
+  <div *ngIf="!authClient.isAuthenticated()">
+    <h4>You are not currently authenticated. Click Sign On to get started.</h4>
+    <div class="input-group">
+      <button type="button" (click)="signIn()">Sign On</button>
+    </div>
+  </div>
+
+  <div *ngIf="authClient.isAuthenticated()">
+    <div class="input-group">
+      <button type="button" (click)="signOff()">Sign Off</button>
+    </div>
+    <div>
+      <h4>User Details</h4>
+      <div [innerHTML]="userDetails"></div>
+    </div>
+    <div>
+      <h4>Token Details</h4>
+      <div [innerHTML]="tokenDetails"></div>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,127 @@
+<div class="container">
+  <h4>Create a New User</h4>
+
+  <div class="text-center"
+       *ngIf="!initialized || loading">
+    <span class="loader loader-xl"></span>
+  </div>
+
+  <div *ngIf="userCreated">
+    <div class="alerts">
+      <div class="alert category alert-success">User was successfully created</div>
+    </div>
+  </div>
+
+  <form [formGroup]="userForm"
+        *ngIf="!userCreated && initialized"
+        (ngSubmit)="onSubmit()">
+
+    <div class="input-field"
+         [class.input-invalid]="name.invalid && !name.untouched">
+      <label for="name">Username*:</label>
+      <input class="input-control"
+             id="name"
+             type="text"
+             formControlName="name">
+    </div>
+
+    <div class="input-field"
+         [class.input-invalid]="email.invalid && !email.untouched">
+      <label for="email">Email*:</label>
+      <input class="input-control"
+             id="email"
+             type="email"
+             formControlName="email">
+      <div class="form-group__wrapper-error"
+           *ngIf="isControllInvalid(email) || userForm.errors">
+        <ng-container *ngIf="isControllInvalid(email)">
+          <div class="error"
+                *ngFor="let error of getErrors(userForm.get('email'), 'email')">
+            {{ error }}
+          </div>
+        </ng-container>
+      </div>
+    </div>
+
+    <div class="input-field"
+         [class.input-invalid]="password.invalid && !password.untouched">
+      <label for="password">Password*:</label>
+      <div class="input-group">
+        <input id="password"
+               type="password"
+               formControlName="password"
+               placeholder="Password">
+
+        <label class="input-addon">
+          <input id="showPassword" type="checkbox" style="display:none" (click)="toggleSecret($event)">
+          <span>
+            <i class="fa fa-fw fa-eye"></i>
+          </span>
+        </label>
+      </div>
+
+      <div class="form-group__wrapper-error"
+           *ngIf="isControllInvalid(password) || userForm.errors">
+        <ng-container *ngIf="isControllInvalid(password)">
+          <div class="error"
+                *ngFor="let error of getErrors(userForm.get('password'), 'password')">
+            {{ error }}
+          </div>
+        </ng-container>
+      </div>
+    </div>
+
+    <div class="input-field"
+         [class.input-invalid]="confirmPassword.invalid && !confirmPassword.untouched">
+      <label for="confirmPassword">Confirm Password*:</label>
+      <div class="input-group">
+        <input class="form-control"
+               id="confirmPassword"
+               type="password"
+               formControlName="confirmPassword"
+               placeholder="Confirm Password">
+
+        <label class="input-addon">
+          <input id="showConfirmPassword" type="checkbox" style="display:none" (click)="toggleSecret($event)">
+          <span>
+            <i class="fa fa-fw fa-eye"></i>
+          </span>
+        </label>
+      </div>
+
+      <div class="form-group__wrapper-error"
+           *ngIf="isControllInvalid(confirmPassword) || userForm.errors">
+        <ng-container *ngIf="isControllInvalid(confirmPassword)">
+          <div class="error"
+               *ngFor="let error of getErrors(userForm.get('confirmPassword'), 'confirmPassword')">
+            {{ error }}
+          </div>
+        </ng-container>
+      </div>
+
+    </div>
+
+    <div class="input-field"
+         [class.input-invalid]="population.invalid && !population.untouched">
+      <label for="population">Population*:</label>
+      <select id="population" formControlName="population">
+        <option *ngFor="let item of populationList"
+                value="{{item.id}}">{{item.name}}</option>
+      </select>
+    </div>
+
+    <button class="btn btn-primary"
+            type="submit"
+            [disabled]="userForm.invalid || loading">Create User</button>
+
+    <div class="alert category alert-danger">{{errorText}}</div>
+
+  </form>
+
+  <div class="input-group back-link">
+    <p>
+      <a routerLink="/">Back to home page</a>
+    </p>
+  </div>
+
+</div>

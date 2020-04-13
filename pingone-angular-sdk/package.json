@@ -1,0 +1,21 @@
+{
+  "name": "pingone-angular-sdk",
+  "private": true,
+  "version": "0.0.1",
+  "description": "",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pingidentity/pingone-js-sdk.git"
+  },
+  "author": "",
+  "license": "",
+  "homepage": "",
+  "devDependencies": {},
+  "typings": "./pingone-angular.d.ts",
+  "main": "./src/pingone-angular.js",
+  "dependencies": {
+    "cross-fetch": "^3.0.4",
+    "jsrsasign": "^8.0.13"
+  }
+}
