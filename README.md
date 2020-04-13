@@ -1,6 +1,6 @@
 # PingOne for Customers Angular OpenID Connect Sample
 
-This samples shows you how to authenticate to PingOne for Customers platform using [OpenID Connect](http://openid.net/connect/) in your Angular applications.
+This sample shows you how to authenticate to PingOne for Customers platform using [OpenID Connect](http://openid.net/connect/) in your Angular applications.
 
 # Setup & Running
 1. Copy this source code: `git clone https://github.com/pingidentity/pingone-customers-sample-angular.git`
