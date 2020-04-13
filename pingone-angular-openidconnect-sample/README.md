@@ -1,27 +1,36 @@
-# PingoneAngularOpenidconnectSample
+# PingOne for Customers Angular OpenID Connect Sample
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.0.
+This samples shows you how to authenticate to PingOne for Customers platform using [OpenID Connect](http://openid.net/connect/) in your Angular applications.
 
-## Development server
+# Setup & Running
+1. Copy this source code: `git clone https://github.com/hkrop/nodejs.git`
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+2. Link not published package
 
-## Code scaffolding
+```
+cd nodejs/pingone-angular-openidconnect-sample
+npm install
+cd ../pingone-angular-sdk
+npm link
+cd ../pingone-angular-openidconnect-sample
+npm link pingone-angular-sdk
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+3. Configure your Application Settings in `/src/app/app.component.ts`
 
-## Build
+```js
+    this.authClient = new AuthOIDC(
+      {
+        environment_id: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
+        client_id: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
+        redirect_uri: 'http://localhost:4200',
+        post_logout_redirect_uri: 'http://localhost:4200',
+        api_uri: 'https://api-staging.pingone.com',
+        auth_uri: 'https://auth-staging.pingone.com'
+      }
+    );
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+4. Run Application `npm start`
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+5. Open `http://localhost:4200`
