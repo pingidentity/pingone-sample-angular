@@ -17,7 +17,7 @@ npm link pingone-angular-sdk
 npm install
 ```
 
-3. Configure your Application Settings in `/src/app/pingone-api.service.ts`
+3. Configure your Application Settings in `/src/app/pingone-api.service.ts` and `./in server.js`
 
 4. Run Application `npm start`
 
