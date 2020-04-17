@@ -1,14 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { PingApiService } from 'src/app/pingone-api.service';
+import { FormHelper } from 'src/app/form-helper';
 
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
   styleUrls: ['./forgot-password.component.scss']
 })
-export class ForgotPasswordComponent implements OnInit {
+export class ForgotPasswordComponent extends FormHelper {
+
+  @ViewChild("passwordRef") passwordInput: ElementRef;
+  @ViewChild("confirmPasswordRef") confirmPasswordInput: ElementRef;
 
   userForm: FormGroup;
   passwordRecoveryForm: FormGroup;
@@ -24,6 +28,7 @@ export class ForgotPasswordComponent implements OnInit {
     private fb: FormBuilder,
     private pingService: PingApiService,
   ) {
+    super();
     this.initForm();
   }
 
@@ -43,9 +48,6 @@ export class ForgotPasswordComponent implements OnInit {
     return this.passwordRecoveryForm.get('confirmPassword');
   }
 
-  ngOnInit(): void {
-  }
-
   onSubmit() {
     if (this.userForm.valid) {
       this.findUser();
@@ -58,38 +60,15 @@ export class ForgotPasswordComponent implements OnInit {
     }
   }
 
-  onResend() {
-    this.resendRecoveryCode();
-  }
-
-  toggleSecret($event) {
-    $event.target.parentNode.previousElementSibling.type = $event.target.checked ? 'text' : 'password';
-    $event.target.parentNode.lastElementChild.innerHTML = $event.target.checked ? '<i class=\'fa fa-fw fa-eye-slash\'>'
-        : '<i class=\'fa fa-fw fa-eye\'>';
-  }
-
-  isControllInvalid(control: AbstractControl): boolean {
-    return control.errors && control.touched && control.dirty;
-  }
-
-  readonly errorMessages = {
-    required: params => `${params.name} is required`,
-    email: params => `${params.name} is not valid`,
-    pattern: params => `Value is not valid`,
-    confirmPasswordIncorrect: params => `Passwords don't match`,
-  };
-
-  getErrors(control: AbstractControl, name: string = 'Field') {
-    if (control.errors) {
-      return Object.keys(control.errors).map(field => {
-        return this.errorMessages[field]({
-          ...control.errors[field],
-          name,
+  resendRecoveryCode() {
+    this.pingService.pingApiClient
+        .sendRecoveryCode(this.userData.id)
+        .then(() => {
+          this.codeResend = true;
+        })
+        .catch((unknownError) => {
+          console.error(unknownError);
         });
-      });
-    } else {
-      return false;
-    }
   }
 
   private initForm() {
@@ -117,14 +96,10 @@ export class ForgotPasswordComponent implements OnInit {
                         this.initRecoveryForm(pwdPattern);
                         this.userInfo = user;
                         this.loading = false;
-                      })
-                })
+                      });
+                });
           }
-        })
-  }
-
-  private getUser(users) {
-    return users['_embedded']['users'][0];
+        });
   }
 
   private initRecoveryForm(pwdPattern: string) {
@@ -134,8 +109,9 @@ export class ForgotPasswordComponent implements OnInit {
       confirmPassword: ['', [
         Validators.required,
         Validators.pattern(pwdPattern),
-        this.confirmPasswordValidator(),
       ]]
+    }, {
+      validator: this.mustMatch('password', 'confirmPassword'),
     });
   }
 
@@ -150,30 +126,7 @@ export class ForgotPasswordComponent implements OnInit {
           this.userDataSaved = true;
         })
         .catch((unknownError) => {
-          console.log(unknownError);
           this.errorText = unknownError;
         });
   }
-
-  private resendRecoveryCode() {
-    this.pingService.pingApiClient
-        .sendRecoveryCode(this.userData.id)
-        .then(() => {
-          this.codeResend = true;
-        })
-        .catch((unknownError) => {
-          console.log(unknownError);
-        });
-  }
-
-  private confirmPasswordValidator(): ValidatorFn {
-    return (control: AbstractControl): {[key: string]: any} | null => {
-      if (!this.passwordRecoveryForm) {
-        return null;
-      }
-      const notMatch = control.value !== this.password.value;
-      return notMatch ? {'confirmPasswordIncorrect': {value: control.value}} : null;
-    };
-  }
-
 }

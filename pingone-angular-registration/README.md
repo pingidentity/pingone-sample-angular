@@ -17,8 +17,27 @@ npm link pingone-angular-sdk
 npm install
 ```
 
-3. Configure your Application Settings in `/src/app/pingone-api.service.ts` and `./in server.js`
+3. Configure your Application Settings in `/src/app/pingone-api.service.ts` 
 
-4. Run Application `npm start`
+```js
+    this.pingApiClient = new ApiClient({
+      environmentID: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
+      clientID: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
+      API_URI: 'https://api-staging.pingone.com',
+      AUTH_URI: 'https://auth-staging.pingone.com'
+    });
+```
 
-5. Open `http://localhost:4200`
+4. Add environment-specific variables in .env file
+
+```properties
+environmentID=PINGONE_ENV_ID
+clientID=PINGONE_CLIENT_ID
+clientSecret=PINGONE__CLIENT_SECRET
+API_URI=PINGONE_API_URI
+AUTH_URI=PINGONE_AUTH_URI
+```
+
+5. Run Application `npm start` and `npm run server`
+
+6. Open `http://localhost:4200`

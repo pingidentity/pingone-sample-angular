@@ -47,13 +47,17 @@
          [class.input-invalid]="password.invalid && !password.untouched">
       <label for="password">Password*:</label>
       <div class="input-group">
-        <input id="password"
+        <input #passwordRef
+               id="password"
                type="password"
                formControlName="password"
                placeholder="Password">
 
         <label class="input-addon">
-          <input id="showPassword" type="checkbox" style="display:none" (click)="toggleSecret($event)">
+          <input id="showPassword"
+                 type="checkbox"
+                 style="display:none"
+                 (click)="toggleSecret(passwordInput)">
           <span>
             <i class="fa fa-fw fa-eye"></i>
           </span>
@@ -75,14 +79,18 @@
          [class.input-invalid]="confirmPassword.invalid && !confirmPassword.untouched">
       <label for="confirmPassword">Confirm Password*:</label>
       <div class="input-group">
-        <input class="form-control"
+        <input #confirmPasswordRef
+               class="form-control"
                id="confirmPassword"
                type="password"
                formControlName="confirmPassword"
                placeholder="Confirm Password">
 
         <label class="input-addon">
-          <input id="showConfirmPassword" type="checkbox" style="display:none" (click)="toggleSecret($event)">
+          <input id="showConfirmPassword"
+                 type="checkbox"
+                 style="display:none"
+                 (click)="toggleSecret(confirmPasswordInput)">
           <span>
             <i class="fa fa-fw fa-eye"></i>
           </span>

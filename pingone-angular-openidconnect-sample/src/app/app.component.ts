@@ -15,8 +15,8 @@ export class AppComponent implements OnInit {
   constructor() {
     this.authClient = new AuthOIDC(
       {
-        environment_id: '27c6efc5-82ab-461a-897e-dc49b4b917e9',
-        client_id: '596905fb-389e-4fee-b7a5-d2e7e66e4bd5',
+        environment_id: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
+        client_id: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
         redirect_uri: 'http://localhost:4200',
         post_logout_redirect_uri: 'http://localhost:4200',
         api_uri: 'https://api-staging.pingone.com',

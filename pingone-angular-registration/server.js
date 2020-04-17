@@ -4,6 +4,9 @@ const express = require('express');
 const app = express();
 const port = 3000;
 const cors = require('cors');
+const dotenv = require('dotenv');
+
+dotenv.config()
 
 /**
  * For local testing only!  Enables CORS for all domains
@@ -42,11 +45,11 @@ class OAuth {
 };
 
 const oAuth = new OAuth({
-  clientID: '44391e61-983f-46f6-a08d-1ad1b25403b6',
-  clientSecret: 'O4SVGuIXEilgO9Pc_E5JS1id-nUZVVmwRzQl8usFBS_gUCUQUC9~_k1WbV2QvnpY',
-  environmentID: '27c6efc5-82ab-461a-897e-dc49b4b917e9',
-  API_URI: 'https://api-staging.pingone.com',
-  AUTH_URI: 'https://auth-staging.pingone.com',
+  environmentID: process.env.environmentID,
+  clientID: process.env.clientID,
+  clientSecret: process.env.clientSecret,
+  API_URI: process.env.API_URI,
+  AUTH_URI: process.env.AUTH_URI,
 });
 
 app.get('/token', (req, res) => {
