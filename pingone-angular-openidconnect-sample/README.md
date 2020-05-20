@@ -3,12 +3,12 @@
 This sample shows you how to authenticate to PingOne for Customers platform using [OpenID Connect](http://openid.net/connect/) in your Angular applications.
 
 # Setup & Running
-1. Copy this source code: `git clone https://github.com/hkrop/nodejs.git`
+1. Copy this source code: `https://github.com/pingidentity/pingone-customers-sample-angular.git`
 
 2. Link not published package
 
 ```
-cd nodejs/pingone-angular-openidconnect-sample
+cd pingone-customers-sample-angular/pingone-angular-openidconnect-sample
 npm install
 cd ../pingone-angular-sdk
 npm link
