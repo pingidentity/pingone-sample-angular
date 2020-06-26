@@ -16,6 +16,6 @@
   "main": "./src/pingone-angular.js",
   "dependencies": {
     "cross-fetch": "^3.0.4",
-    "jsrsasign": "^8.0.13"
+    "jsrsasign": "^8.0.19"
   }
 }
