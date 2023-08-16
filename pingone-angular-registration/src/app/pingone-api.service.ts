@@ -13,8 +13,8 @@ export class PingApiService {
     this.pingApiClient = new ApiClient({
       environmentID: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
       clientID: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
-      API_URI: 'https://api-staging.pingone.com',
-      AUTH_URI: 'https://auth-staging.pingone.com'
+      API_URI: 'https://api.pingone.com',
+      AUTH_URI: 'https://auth.pingone.com'
     });
   }
 

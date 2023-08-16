@@ -10,14 +10,25 @@ This sample demonstrates how to:
 2. Link not published package
 
 ```
-cd pingone-angular-sdk
+cd pingone-customers-sample-angular/pingone-angular-registration
+npm install
+cd ../pingone-angular-sdk
 npm link
+npm install
 cd ../pingone-angular-registration
 npm link pingone-angular-sdk
-npm install
 ```
 
-3. Configure your Application Settings in `/src/app/pingone-api.service.ts` 
+3. Create `Single Page App` with:
+    - `Token` and `ID Token` response types
+    - `Implicit` grant type
+    - `None` token authentication method
+    - `http://localhost:4200` redirect URI
+    - `http://localhost:4200` signoff URL
+ 
+4. Enable applications in the PingOne admin console.
+
+5. Configure your Application Settings in `/src/app/pingone-api.service.ts` 
 
 ```js
     this.pingApiClient = new ApiClient({
@@ -28,16 +39,22 @@ npm install
     });
 ```
 
-4. Add environment-specific variables in .env file
+6. Create `Worker` application with:
+    - `Client Credentials` grant type
+    - `Client Secret Post` token authentication method
+
+7. Enable applications in the PingOne admin console.
+
+8. Add environment-specific variables in .env file
 
 ```properties
 environmentID=PINGONE_ENV_ID
-clientID=PINGONE_CLIENT_ID
-clientSecret=PINGONE__CLIENT_SECRET
-API_URI=PINGONE_API_URI
-AUTH_URI=PINGONE_AUTH_URI
+clientID=PINGONE_CLIENT_ID_WORKER_APP
+clientSecret=PINGONE_CLIENT_SECRET_WORKER_APP
+API_URI=https://api.pingone.com
+AUTH_URI=https://api.pingone.com
 ```
 
-5. Run Application `npm start` and `npm run server`
+9. Run Application `npm start` and `npm run server`
 
-6. Open `http://localhost:4200`
+10. Open `http://localhost:4200`

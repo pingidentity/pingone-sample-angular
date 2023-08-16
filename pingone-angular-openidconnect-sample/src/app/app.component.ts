@@ -19,8 +19,8 @@ export class AppComponent implements OnInit {
         client_id: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
         redirect_uri: 'http://localhost:4200',
         post_logout_redirect_uri: 'http://localhost:4200',
-        api_uri: 'https://api-staging.pingone.com',
-        auth_uri: 'https://auth-staging.pingone.com'
+        api_uri: 'https://api.pingone.com',
+        auth_uri: 'https://auth.pingone.com'
       }
     );
   }
