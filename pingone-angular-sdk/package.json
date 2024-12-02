@@ -15,7 +15,7 @@
   "typings": "./pingone-angular.d.ts",
   "main": "./src/pingone-angular.js",
   "dependencies": {
-    "cross-fetch": "^3.0.4",
+    "cross-fetch": "^3.1.5",
     "jsrsasign": "^10.2.0"
   }
 }
